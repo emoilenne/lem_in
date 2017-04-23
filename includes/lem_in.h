@@ -29,7 +29,6 @@ typedef struct		s_map
 	t_list			*input;
 }					t_map;
 
-
 t_map	*parse_file(void);
 bool	solve(t_map *map);
 void	print_result(t_map *map);
