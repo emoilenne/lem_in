@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:02 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/04/23 12:43:17 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/04/23 12:59:16 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,13 @@ t_map			*parse_file(void)
 	if ((return_value = get_next_line(0, &line)) == 1)
 	{
 		map->ants_count = ft_atoi(line);
-		ft_lstaddend(&(map->input), ft_lstnew(line, ft_strlen(line)));
+		ft_lstaddend(&(map->input), ft_lstnew(line, ft_strlen(line) + 1));
 		free(line);
 		while ((return_value = get_next_line(0, &line)) == 1)
 		{
 			if (!line || !(*line))
 				ft_error_exit("ERROR\n");
-			ft_lstaddend(&(map->input), ft_lstnew(line, ft_strlen(line)));
+			ft_lstaddend(&(map->input), ft_lstnew(line, ft_strlen(line) + 1));
 			parse_input(map, line);
 			free(line);
 		}
