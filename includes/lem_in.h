@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:34:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/04/10 13:34:30 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/04/23 10:39:26 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,6 @@ typedef struct		s_map
 	int				path_length;
 	t_list			*input;
 }					t_map;
-
-typedef struct		s_solve_info
-{
-	int				*path;
-	int				*min_path;
-	int				min_length;
-	int				current_length;
-}					t_solve_info;
 
 t_map	*parse_file(void);
 bool	solve(t_map *map);

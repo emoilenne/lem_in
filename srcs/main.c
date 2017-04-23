@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 15:11:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/04/10 15:11:31 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/04/23 10:32:27 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,9 @@ int		main(void)
 	t_map	*map;
 
 	map = parse_file();
-	// if (solve(map))
-	map->path_length = 3;
-	map->path = (int*)malloc(sizeof(int) * 3);
-	map->path[0] = 2;
-	map->path[1] = 3;
-	map->path[2] = 1;
-	
+	if (solve(map))
 		print_result(map);
-	// else
-	// 	ft_error_exit("ERROR\n");
+	else
+		ft_error_exit("ERROR\n");
 	// free_map(map);
 }

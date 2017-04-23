@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_result.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 15:16:26 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/04/10 15:16:27 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/04/23 09:55:59 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,8 @@ void		print_result(t_map *map)
 		current_input = current_input->next;
 	}
 	ft_putchar('\n');
-	print_ants(map);
+	if (map->rooms_count == 1)
+		ft_putendl("All ants are already in the ##end room!");
+	else
+		print_ants(map);
 }
