@@ -30,12 +30,12 @@ static void	print_ants(t_map *map)
 				ft_printf("L%d-%s", current_ant,
 					map->rooms[map->path[last_ant - current_ant]]);
 				if (current_ant != last_ant && current_ant != map->ants_count)
-					ft_putchar("\n");
+					ft_putchar(' ');
 			}
-			ant_in_turn++;
+			current_ant++;
 		}
-		ft_putchar("\n");
-		start_ant++;
+		ft_putchar('\n');
+		turn++;
 	}
 }
 
@@ -49,5 +49,6 @@ void		print_result(t_map *map)
 		ft_putendl((char*)current_input->content);
 		current_input = current_input->next;
 	}
+	ft_putchar('\n');
 	print_ants(map);
 }

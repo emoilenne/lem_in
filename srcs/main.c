@@ -17,9 +17,15 @@ int		main(void)
 	t_map	*map;
 
 	map = parse_file();
-	if (solve(map))
+	// if (solve(map))
+	map->path_length = 3;
+	map->path = (int*)malloc(sizeof(int) * 3);
+	map->path[0] = 2;
+	map->path[1] = 3;
+	map->path[2] = 1;
+	
 		print_result(map);
-	else
-		ft_error_exit("ERROR\n");
-	free_map(map);
+	// else
+	// 	ft_error_exit("ERROR\n");
+	// free_map(map);
 }

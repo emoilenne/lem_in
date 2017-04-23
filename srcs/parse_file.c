@@ -21,19 +21,22 @@ static void		adjust_map(t_map *map, int rooms_count)
 	map->links = (bool**)ft_memalloc(sizeof(bool*) * rooms_count);
 	index = 0;
 	while (index < map->rooms_count)
+	{
 		map->links[index] = (bool*)ft_memalloc(sizeof(bool) * rooms_count);
+		index++;
+	}
 }
 
 static bool		parse_room(t_map *map, char *line, int room_number)
 {
 	char	**input;
 
-	input = ft_strsplit(line);
+	input = ft_strsplit(line, ' ');
 	if (!input[1])
 		adjust_map(map, room_number);
 	else if (input[1] && input[2])
-		ft_lstaddend(&(map->rooms_list), ft_lstnew(ft_strdup(input[0],
-					sizeof(char*))))
+		ft_lstaddend(&(map->rooms_list), ft_lstnew(ft_strdup(input[0]),
+					sizeof(char*)));
 	else
 		ft_error_exit("ERROR\n");
 	ft_strsplit_free(input);
@@ -49,8 +52,8 @@ static void		parse_link(t_map *map, char *line)
 	input = ft_strsplit(line, '-');
 	if (!map->rooms || !map->links || !input[1])
 		ft_error_exit("ERROR\n");
-	index1 = get_index(input[0]);
-	index2 = get_index(input[1]);
+	index1 = get_index(map, input[0]);
+	index2 = get_index(map, input[1]);
 	map->links[index1][index2] = true;
 	map->links[index2][index1] = true;
 }
@@ -75,14 +78,32 @@ static void		parse_input(t_map *map, char *line)
 	}
 }
 
+static t_map	*init_map()
+{
+	t_map	*map;
+
+	map = (t_map*)ft_memalloc(sizeof(t_map));
+	map->ants_count = -1;
+	map->start = -1;
+	map->end = -1;
+	map->rooms_count = -1;
+	map->rooms_list = NULL;
+	map->rooms = NULL;
+	map->links = NULL;
+	map->path = NULL;
+	map->path_length = -1;
+	map->input = NULL;
+	return (map);
+}
+
 t_map			*parse_file(void)
 {
 	char	*line;
 	int		return_value;
 	t_map	*map;
 
-	map = (t_map*)ft_memalloc(sizeof(t_map));
-	if ((return_value = get_next_line(0, &line == 1) == 1)
+	map = init_map();
+	if ((return_value = get_next_line(0, &line)) == 1)
 	{
 		map->ants_count = ft_atoi(line);
 		ft_lstaddend(&(map->input), ft_lstnew(ft_strdup(line), sizeof(line)));
@@ -97,8 +118,9 @@ t_map			*parse_file(void)
 		}
 	}
 	if (return_value == -1 || (return_value == 0 && !(map->input)) ||
-		map->start == -1 || map->end == -1 || map->start >= room_number ||
-		map->end >= room_number)
+		map->rooms_count == -1 || map->start == -1 || map->end == -1 ||
+		map->start >= map->rooms_count || map->end >= map->rooms_count ||
+		map->ants_count < 1)
 		ft_error_exit("ERROR\n");
 	return (map);
 }

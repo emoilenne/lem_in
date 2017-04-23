@@ -1,5 +1,5 @@
 
-NAME		=	123
+NAME		=	lem_in
 
 CC			=	gcc
 CFLAGS		+=	-Wall -Werror -Wextra
@@ -10,6 +10,7 @@ SRCSFL		=	main.c \
 			parse_file.c \
 			print_result.c \
 			solve.c \
+			get_index.c \
 
 SRCSFD		=	srcs
 OBJSFD		=	objs
@@ -51,4 +52,3 @@ fclean: clean
 	@make -C libft fclean
 
 re: fclean all
-

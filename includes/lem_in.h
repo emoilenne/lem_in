@@ -29,6 +29,14 @@ typedef struct		s_map
 	t_list			*input;
 }					t_map;
 
+typedef struct		s_solve_info
+{
+	int				*path;
+	int				*min_path;
+	int				min_length;
+	int				current_length;
+}					t_solve_info;
+
 t_map	*parse_file(void);
 bool	solve(t_map *map);
 void	print_result(t_map *map);
