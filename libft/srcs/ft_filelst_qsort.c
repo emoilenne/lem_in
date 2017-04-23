@@ -59,6 +59,5 @@ void	ft_filelst_qsort(t_list **lst, int (*file_compare)(t_file*, t_file*))
 	rec_sort(array_of_files, 0, size - 1, file_compare);
 	sorted_list = ft_filearr_tolst(array_of_files, size);
 	ft_lstdel(lst, ft_lstnotdelcontent);
-	//here check if segfault?
 	*lst = sorted_list;
 }

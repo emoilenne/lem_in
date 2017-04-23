@@ -12,7 +12,8 @@
 
 #include "lem_in.h"
 
-void	solve(t_map *map)
+bool	solve(t_map *map)
 {
-	
+	(void)map;
+	return (true);
 }

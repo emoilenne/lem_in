@@ -182,6 +182,7 @@ void			ft_textcolor(int attr, int fg, int bg);
 */
 void			ft_strswap(char **str1, char **str2);
 void			ft_strqsort(char *strings[], int size);
+char			**ft_strlst_toarr(t_list *lst);
 /*
 **  Files
 */

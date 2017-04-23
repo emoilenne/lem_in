@@ -15,32 +15,25 @@
 
 # include "libft.h"
 
-# define DEFAULT_ROOM 0
-# define START_ROOM 1
-# define END_ROOM 2
-
-typedef struct	s_link
-{
-	char			*name;
-	struct s_link	*next;
-}					t_link;
-
-typedef struct		s_room
-{
-	char			*name;
-	t_link			*connected;
-	struct s_room	*next;
-}					t_room;
-
 typedef struct		s_map
 {
 	int				ants_count;
-	t_room			*rooms;
-	t_room			*start_room;
-	t_room			*current_room;
-	t_room			*end_room;
+	int				start;
+	int				end;
+	int				rooms_count;
+	t_list			*rooms_list;
+	char			**rooms;
+	bool			**links;
+	int				*path;
+	int				path_length;
+	t_list			*input;
 }					t_map;
 
 
+t_map	*parse_file(void);
+bool	solve(t_map *map);
+void	print_result(t_map *map);
+void	free_map(t_map *map);
+int		get_index(t_map *map, char *name);
 
 #endif

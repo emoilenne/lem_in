@@ -12,103 +12,67 @@
 
 #include "lem_in.h"
 
+static void		adjust_map(t_map *map, int rooms_count)
+{
+	int index;
+
+	map->rooms = ft_strlst_toarr(map->rooms_list);
+	map->rooms_count = rooms_count;
+	map->links = (bool**)ft_memalloc(sizeof(bool*) * rooms_count);
+	index = 0;
+	while (index < map->rooms_count)
+		map->links[index] = (bool*)ft_memalloc(sizeof(bool) * rooms_count);
+}
+
+static bool		parse_room(t_map *map, char *line, int room_number)
+{
+	char	**input;
+
+	input = ft_strsplit(line);
+	if (!input[1])
+		adjust_map(map, room_number);
+	else if (input[1] && input[2])
+		ft_lstaddend(&(map->rooms_list), ft_lstnew(ft_strdup(input[0],
+					sizeof(char*))))
+	else
+		ft_error_exit("ERROR\n");
+	ft_strsplit_free(input);
+	return (input[1]) ? true : false;
+}
+
+static void		parse_link(t_map *map, char *line)
+{
+	char	**input;
+	int		index1;
+	int		index2;
+
+	input = ft_strsplit(line, '-');
+	if (!map->rooms || !map->links || !input[1])
+		ft_error_exit("ERROR\n");
+	index1 = get_index(input[0]);
+	index2 = get_index(input[1]);
+	map->links[index1][index2] = true;
+	map->links[index2][index1] = true;
+}
+
 static void		parse_input(t_map *map, char *line)
 {
-	char			**input_values;
-	static int		room_status = DEFAULT_ROOM;
+	static int		room_number = 0;
+	static bool		parse_links = false;
 
-	if (!line || !(*line))
-		ft_error_exit("ERROR\n");
-	if (!ft_strcmp(line, "##start")
-		room_status = START_ROOM;
-	else if (!ft_strcmp(line, "##end"))
-		room_status = END_ROOM;
+	if (ft_strequ(line, "##start"))
+		map->start = room_number;
+	else if (ft_strequ(line, "##end"))
+		map->end = room_number;
 	else if (line[0] != '#')
 	{
-		input = ft_strsplit(line, ' ');
-		if (input[1])
-			add_room(map, ft_strdup(input[0]), room_status);
+		if (!parse_links)
+			parse_links = !parse_room(map, line, room_number);
+		if (parse_links)
+			parse_link(map, line);
 		else
-		{
-			ft_strsplit_free(input);
-			input = ft_strsplit(line, '-');
-			add_links(map, input[0], input[1]);
-		}
-		ft_strsplit_free(input);
-		room_status = DEFAULT_ROOM;
+			room_number++;
 	}
-}
-
-static void		link_rooms(t_map *map, t_room *room1, t_room *room2)
-{
-	t_link	*link;
-	t_link	*new_link;
-
-	new_link = (t_link*)ft_memalloc(sizeof(t_link));
-	new_link->name = room2->name;
-	if (room1->connected)
-	{
-		link = room1->connected;
-		while (link->next)
-			link = link->next;
-		link->next = new_link;
-	}
-	else
-		room1->connected = new_link;
-	new_link = (t_link*)ft_memalloc(sizeof(t_link));
-	new_link->name = room1->name;
-	if (room2->connected)
-	{
-		link = room2->connected;
-		while (link->next)
-			link = link2>next;
-		link->next = new_link;
-	}
-	else
-		room2->connected = new_link;
-}
-
-static void		add_link(t_map *map, char *name1, char *name2)
-{
-	t_room	*room1;
-	t_room	*room2;
-
-	room1 = map->rooms;
-	while (room1)
-	{
-		if (ft_strequ(room1->name, name1))
-			break;
-		room1 = room1->next;
-	}
-	room2 = map->rooms;
-	while (room2)
-	{
-		if (ft_strequ(room2->name, name2))
-			break;
-		room2 = room2->next;
-	}
-	if (!room1 || !room2)
-		ft_error_exit("ERROR\n");
-	link_rooms(map, room1, room2);
-}
-
-static void		add_room(t_map *map, char *name, int room_status)
-{
-	t_room	*room;
-
-	room = (t_room*)malloc(sizeof(t_room));
-	room->name = name;
-	room->connected = NULL;
-	room->next = NULL;
-	if (map->current_room)
-		map->current_room->next = room;
-	else
-		map->rooms = room;
-	map->current_room = room;
-	if (room_status == START_ROOM)
-		map->start_room = room;
-	else if (room_status == END_ROOM)
-		map->end_room = room;
 }
 
 t_map			*parse_file(void)
@@ -118,14 +82,23 @@ t_map			*parse_file(void)
 	t_map	*map;
 
 	map = (t_map*)ft_memalloc(sizeof(t_map));
-	while ((return_value = get_next_line(0, &line)) == 1)
+	if ((return_value = get_next_line(0, &line == 1) == 1)
 	{
-		if (!line || !(*line))
-			ft_error_exit("ERROR\n");
-		parse_input(map, line);
-		ft_lstaddend(&map->input, ft_lstnew(line, sizeof(line)));
+		map->ants_count = ft_atoi(line);
+		ft_lstaddend(&(map->input), ft_lstnew(ft_strdup(line), sizeof(line)));
 		free(line);
+		while ((return_value = get_next_line(0, &line)) == 1)
+		{
+			if (!line || !(*line))
+				ft_error_exit("ERROR\n");
+			parse_input(map, line);
+			ft_lstaddend(&(map->input), ft_lstnew(ft_strdup(line), sizeof(line)));
+			free(line);
+		}
 	}
-	if (return_value == -1 || (return_value == 0 && !map->input))
+	if (return_value == -1 || (return_value == 0 && !(map->input)) ||
+		map->start == -1 || map->end == -1 || map->start >= room_number ||
+		map->end >= room_number)
 		ft_error_exit("ERROR\n");
+	return (map);
 }

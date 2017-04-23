@@ -14,23 +14,28 @@
 
 static void	print_ants(t_map *map)
 {
-	int	last_ant;
+	int	turn;
 	int	current_ant;
+	int	last_ant;
 
-	last_ant = 1;
-	while (last_ant <= map->ants_count)
+	turn = 2 - map->path_length;
+	while (turn <= map->ants_count)
 	{
-		current_ant = last_ant - map->solution_rooms_count;
-		if (current_ant <= 0)
-			current_ant = 1;
+		current_ant = turn;
+		last_ant = turn + map->path_length - 1;
 		while (current_ant <= last_ant)
 		{
-			ft_printf("L%i-%s", current_ant, map->path[current_ant - last_ant]);
-			if (current_ant != last_ant) //TODO change printf ^
-				ft_putchar(' ');
+			if (current_ant > 0 && current_ant <= map->ants_count)
+			{
+				ft_printf("L%d-%s", current_ant,
+					map->rooms[map->path[last_ant - current_ant]]);
+				if (current_ant != last_ant && current_ant != map->ants_count)
+					ft_putchar("\n");
+			}
+			ant_in_turn++;
 		}
-		ft_putchar('\n');
-		last_ant++;
+		ft_putchar("\n");
+		start_ant++;
 	}
 }
 

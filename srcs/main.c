@@ -16,8 +16,10 @@ int		main(void)
 {
 	t_map	*map;
 
-	map = parse_input();
-	solve(map);
-	print_result(map);
+	map = parse_file();
+	if (solve(map))
+		print_result(map);
+	else
+		ft_error_exit("ERROR\n");
 	free_map(map);
 }

@@ -100,6 +100,7 @@ SRCSFL 		=	ft_memset.c \
 				ft_strqsort.c \
 				ft_strswap.c \
 				ft_strndup.c \
+				ft_strlst_toarr.c \
 				ft_filenew.c \
 				ft_lstdelfile.c \
 				ft_filelst_qsort.c \
