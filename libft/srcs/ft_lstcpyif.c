@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstcpyif.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:08:26 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/17 22:08:27 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/27 15:00:04 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstcpyif(t_list *list, int (*needs_to_copy)(void*,size_t))
+t_list	*ft_lstcpyif(t_list *list, int (*needs_to_copy)(void*, size_t))
 {
 	t_list	*copy_list;
 	t_list	*new_node;

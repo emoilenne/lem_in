@@ -46,10 +46,10 @@ static void	copy_stat(t_file *file, struct stat *file_stat)
 		file->linking_to = NULL;
 }
 
-int		ft_file_getinfo(t_file *file, char *add_to_error)
+int			ft_file_getinfo(t_file *file, char *add_to_error)
 {
 	struct stat	file_stat;
-	int 		return_from_stat;
+	int			return_from_stat;
 	char		*info_for_error;
 
 	return_from_stat = lstat(file->full_name, &file_stat);
@@ -63,4 +63,3 @@ int		ft_file_getinfo(t_file *file, char *add_to_error)
 	copy_stat(file, &file_stat);
 	return (0);
 }
-

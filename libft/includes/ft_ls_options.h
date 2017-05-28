@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls_options.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 18:19:44 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 18:19:54 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/27 17:58:44 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_ARGUMENTS_H
-# define FT_LS_ARGUMENTS_H
+#ifndef FT_LS_OPTIONS_H
+# define FT_LS_OPTIONS_H
 
-typedef uint8_t t_options;
+typedef uint8_t	t_options;
 
 # define OPTION_LONG_FORMAT			1
 # define OPTION_RECURSIVE			2

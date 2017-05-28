@@ -6,20 +6,20 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 15:15:23 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/04/23 10:42:48 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/27 18:01:02 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static bool	set_min_path(t_map *map, int *path, int length)
+static bool		set_min_path(t_map *map, int *path, int length)
 {
 	map->path_length = length;
 	ft_memcpy(map->path, path, sizeof(int) * length);
 	return (true);
 }
 
-static bool	not_visited(int *path, int length, int room)
+static bool		not_visited(int *path, int length, int room)
 {
 	int	index;
 
@@ -33,7 +33,7 @@ static bool	not_visited(int *path, int length, int room)
 	return (true);
 }
 
-static bool	_solve(t_map *map, int *path, int length, int current_room)
+static bool		_solve(t_map *map, int *path, int length, int current_room)
 {
 	bool	found_path;
 	bool	solved;
@@ -60,7 +60,7 @@ static bool	_solve(t_map *map, int *path, int length, int current_room)
 	return (solved);
 }
 
-bool	solve(t_map *map)
+bool			solve(t_map *map)
 {
 	int	*path;
 

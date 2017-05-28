@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strqsort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 17:49:44 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 17:49:46 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/27 15:00:05 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	rec_sort(char *strings[], int begin, int end)
 	rec_sort(strings, right + 1, end);
 }
 
-void	ft_strqsort(char *strings[], int size)
+void		ft_strqsort(char *strings[], int size)
 {
 	rec_sort(strings, 0, size - 1);
 }

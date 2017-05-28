@@ -6,34 +6,30 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:02 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/04/23 12:59:16 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/27 18:00:15 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void		adjust_map(t_map *map, int rooms_count)
-{
-	int index;
-
-	map->rooms = ft_strlst_toarr(map->rooms_list);
-	map->rooms_count = rooms_count;
-	map->links = (bool**)ft_memalloc(sizeof(bool*) * rooms_count);
-	index = 0;
-	while (index < map->rooms_count)
-	{
-		map->links[index] = (bool*)ft_memalloc(sizeof(bool) * rooms_count);
-		index++;
-	}
-}
-
 static bool		parse_room(t_map *map, char *line, int room_number)
 {
 	char	**input;
+	int		index;
 
 	input = ft_strsplit(line, ' ');
 	if (!input[1])
-		adjust_map(map, room_number);
+	{
+		map->rooms = ft_strlst_toarr(map->rooms_list);
+		map->rooms_count = rooms_count;
+		map->links = (bool**)ft_memalloc(sizeof(bool*) * rooms_count);
+		index = 0;
+		while (index < map->rooms_count)
+		{
+			map->links[index] = (bool*)ft_memalloc(sizeof(bool) * rooms_count);
+			index++;
+		}
+	}
 	else if (input[1] && input[2])
 		ft_lstaddend(&(map->rooms_list), ft_lstnew(ft_strdup(input[0]),
 					sizeof(char*)));
@@ -78,7 +74,7 @@ static void		parse_input(t_map *map, char *line)
 	}
 }
 
-static t_map	*init_map()
+static t_map	*init_map(void)
 {
 	t_map	*map;
 

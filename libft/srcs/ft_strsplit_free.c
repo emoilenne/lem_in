@@ -18,7 +18,7 @@ void	ft_strsplit_free(char **arr)
 
 	index = 0;
 	if (!arr)
-		return;
+		return ;
 	while (arr[index])
 	{
 		free(arr[index]);

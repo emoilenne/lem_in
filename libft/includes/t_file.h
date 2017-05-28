@@ -34,9 +34,6 @@
 **  - file_size:             size of the file in bytes
 **  - blocks:                blocks allocated to the file
 **  - linking_to:            name of the file that is linked by this file
-**  -
-**  -
-**  -
 */
 
 # define FT_ISBLK(mode) ((mode & S_IFMT) == S_IFBLK)
@@ -67,5 +64,5 @@ typedef struct	s_file
 
 	char		*linking_to;
 }				t_file;
-//TODO check where to initialize files_inside and where
+
 #endif
