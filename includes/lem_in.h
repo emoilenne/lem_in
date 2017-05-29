@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:34:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/05/27 15:01:20 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/29 14:56:34 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct		s_map
 t_map				*parse_file(void);
 bool				solve(t_map *map);
 void				print_result(t_map *map);
-void				free_map(t_map *map);
+void				free_and_exit(t_map *map, int code);
 int					get_index(t_map *map, char *name);
 
 #endif

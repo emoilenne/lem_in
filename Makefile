@@ -6,7 +6,7 @@
 #    By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/23 09:55:14 by ofedorov          #+#    #+#              #
-#    Updated: 2017/04/23 09:55:34 by ofedorov         ###   ########.fr        #
+#    Updated: 2017/05/29 15:02:59 by ofedorov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCSFL		=	main.c \
 			print_result.c \
 			solve.c \
 			get_index.c \
+			free_and_exit.c \
 
 SRCSFD		=	srcs
 OBJSFD		=	objs

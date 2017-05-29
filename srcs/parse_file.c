@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:02 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/05/27 18:00:15 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/29 15:02:31 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static bool		parse_room(t_map *map, char *line, int room_number)
 	if (!input[1])
 	{
 		map->rooms = ft_strlst_toarr(map->rooms_list);
-		map->rooms_count = rooms_count;
-		map->links = (bool**)ft_memalloc(sizeof(bool*) * rooms_count);
+		map->rooms_count = room_number;
+		map->links = (bool**)ft_memalloc(sizeof(bool*) * room_number);
 		index = 0;
 		while (index < map->rooms_count)
 		{
-			map->links[index] = (bool*)ft_memalloc(sizeof(bool) * rooms_count);
+			map->links[index] = (bool*)ft_memalloc(sizeof(bool) * room_number);
 			index++;
 		}
 	}

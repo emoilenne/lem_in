@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:03:12 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 15:14:40 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/29 14:51:57 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@
 # define MAGENTA	5
 # define CYAN		6
 # define WHITE		7
+
+# define SUCCESS	0
+# define FAILURE	1
 
 # define NOCOLOR	RESET, WHITE, BLACK
 
