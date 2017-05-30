@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 15:15:23 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/05/27 18:01:02 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/29 19:06:41 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,15 @@ static bool		_solve(t_map *map, int *path, int length, int current_room)
 
 bool			solve(t_map *map)
 {
-	int	*path;
+	int		*path;
+	bool	solved;
 
 	if (map->rooms_count == 1)
 		return (true);
 	path = (int*)malloc(sizeof(int) * (map->rooms_count - 1));
 	map->path = (int*)malloc(sizeof(int) * (map->rooms_count - 1));
 	map->path_length = 0;
-	return (_solve(map, path, 0, map->start));
+	solved = _solve(map, path, 0, map->start);
+	free(path);
+	return (solved);
 }

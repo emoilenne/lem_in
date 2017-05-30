@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:02 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/05/29 15:02:31 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/05/29 19:28:24 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static bool		parse_room(t_map *map, char *line, int room_number)
 	int		index;
 
 	input = ft_strsplit(line, ' ');
-	if (!input[1])
+	if (!input)
+		return (false);
+	if (input[0] && !input[1])
 	{
 		map->rooms = ft_strlst_toarr(map->rooms_list);
 		map->rooms_count = room_number;
@@ -30,13 +32,13 @@ static bool		parse_room(t_map *map, char *line, int room_number)
 			index++;
 		}
 	}
-	else if (input[1] && input[2])
-		ft_lstaddend(&(map->rooms_list), ft_lstnew(ft_strdup(input[0]),
-					sizeof(char*)));
+	else if (input[0] && input[1] && input[2])
+		ft_lstaddend(&(map->rooms_list), ft_lstnew(input[0],
+										ft_strlen(input[0]) + 1));
 	else
-		ft_error_exit("ERROR\n");
+		free_and_exit(map, FAILURE);
 	ft_strsplit_free(input);
-	return (input[1]) ? true : false;
+	return (map->rooms_count == -1) ? true : false;
 }
 
 static void		parse_link(t_map *map, char *line)
