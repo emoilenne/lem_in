@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:02 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:26:10 by sasha            ###   ########.fr       */
+/*   Updated: 2017/09/19 13:51:31 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ static bool		parse_room(t_map *map, char *line, int room_number)
 		map->rooms = ft_strlst_toarr(map->rooms_list);
 		map->rooms_count = room_number;
 		map->links = (bool**)ft_memalloc(sizeof(bool*) * room_number);
-		index = 0;
-		while (index < map->rooms_count)
-		{
+		index = -1;
+		while (++index < map->rooms_count)
 			map->links[index] = (bool*)ft_memalloc(sizeof(bool) * room_number);
-			index++;
-		}
 	}
 	else if (input[0] && input[1] && input[2])
 		ft_lstaddend(&(map->rooms_list), ft_lstnew(input[0],
-										ft_strlen(input[0]) + 1));
+									ft_strlen(input[0]) + 1));
 	else
+	{
+		ft_strsplit_free(input);
 		free_and_exit(map, FAILURE);
+	}
 	ft_strsplit_free(input);
 	return (map->rooms_count == -1) ? true : false;
 }
@@ -49,11 +49,15 @@ static void		parse_link(t_map *map, char *line)
 
 	input = ft_strsplit(line, '-');
 	if (!map->rooms || !map->links || !input[1])
-		ft_error_exit("ERROR\n");
+	{
+		ft_strsplit_free(input);
+		free_and_exit(map, FAILURE);
+	}
 	index1 = get_index(map, input[0]);
 	index2 = get_index(map, input[1]);
 	map->links[index1][index2] = true;
 	map->links[index2][index1] = true;
+	ft_strsplit_free(input);
 }
 
 static void		parse_input(t_map *map, char *line)
@@ -109,7 +113,7 @@ t_map			*parse_file(void)
 		while ((return_value = get_next_line(0, &line)) == 1)
 		{
 			if (!line || !(*line))
-				ft_error_exit("ERROR\n");
+				free_and_exit(map, FAILURE);
 			ft_lstaddend(&(map->input), ft_lstnew(line, ft_strlen(line) + 1));
 			parse_input(map, line);
 			free(line);
@@ -119,6 +123,6 @@ t_map			*parse_file(void)
 		map->rooms_count == -1 || map->start == -1 || map->end == -1 ||
 		map->start >= map->rooms_count || map->end >= map->rooms_count ||
 		map->ants_count < 1 || map->start == map->end)
-		ft_error_exit("ERROR\n");
+		free_and_exit(map, FAILURE);
 	return (map);
 }

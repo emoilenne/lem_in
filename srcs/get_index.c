@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 09:55:48 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/04/23 09:55:55 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/09/19 13:49:36 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	get_index(t_map *map, char *name)
 	while (i < map->rooms_count && ft_strcmp(map->rooms[i], name))
 		i++;
 	if (i == map->rooms_count)
-		ft_error_exit("ERROR\n");
+		free_and_exit(map, FAILURE);
 	return (i);
 }

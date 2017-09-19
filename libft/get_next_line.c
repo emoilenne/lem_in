@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 19:16:04 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:35:21 by sasha            ###   ########.fr       */
+/*   Updated: 2017/09/19 14:05:21 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ int			get_next_line(int fd, char **line)
 	while ((c = ft_getc(fd)) != 0 && c != '\n' && buffer < end)
 		*buffer++ = c;
 	*buffer = '\0';
+	if (ft_strlen(dest) == 0 && c == 0)
+	{
+		free(dest);
+		return (0);
+	}
 	*line = ft_strdup(dest);
 	free(dest);
-	return ((c == 0 && ft_strlen(*line) == 0) ? 0 : 1);
+	return (1);
 }
