@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 15:11:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:19:04 by sasha            ###   ########.fr       */
+/*   Created: 2016/09/26 19:53:50 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/09/19 13:39:01 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-int		main(void)
+void	ft_putnbr(long long n)
 {
-	t_map	*map;
-
-	map = parse_file();
-	if (solve(map))
-		print_result(map);
+	if (n < 0)
+	{
+		ft_putchar('-');
+		if (n < -9)
+			ft_putnbr(-(n / 10));
+		ft_putchar('0' - (n - (n / 10) * 10));
+	}
+	else if (n > 9)
+	{
+		ft_putnbr(n / 10);
+		ft_putchar('0' + n % 10);
+	}
 	else
-		ft_error_exit("ERROR\n");
-	free_and_exit(map, SUCCESS);
+		ft_putchar('0' + n);
 }

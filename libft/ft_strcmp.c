@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 15:11:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:19:04 by sasha            ###   ########.fr       */
+/*   Created: 2016/09/22 20:18:04 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/09/19 13:34:59 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-int		main(void)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	t_map	*map;
-
-	map = parse_file();
-	if (solve(map))
-		print_result(map);
-	else
-		ft_error_exit("ERROR\n");
-	free_and_exit(map, SUCCESS);
+	while (*s1 != 0 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)(*s1) - (unsigned char)*(s2));
 }

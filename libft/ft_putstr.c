@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 15:11:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:19:04 by sasha            ###   ########.fr       */
+/*   Created: 2016/09/26 19:47:36 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/09/19 13:34:52 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-int		main(void)
+int	ft_putstr(char const *s)
 {
-	t_map	*map;
+	int	i;
 
-	map = parse_file();
-	if (solve(map))
-		print_result(map);
-	else
-		ft_error_exit("ERROR\n");
-	free_and_exit(map, SUCCESS);
+	i = 0;
+	while (s && *s)
+	{
+		write(1, s, 1);
+		s++;
+		i++;
+	}
+	return (i);
 }

@@ -6,7 +6,7 @@
 #    By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/23 09:55:14 by ofedorov          #+#    #+#              #
-#    Updated: 2017/05/29 15:02:59 by ofedorov         ###   ########.fr        #
+#    Updated: 2017/09/19 13:09:19 by sasha            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,50 +17,64 @@ CFLAGS		+=	-Wall -Werror -Wextra
 RM			=	/bin/rm
 RMFLAGS		+=	-rf
 
-SRCSFL		=	main.c \
-			parse_file.c \
-			print_result.c \
-			solve.c \
-			get_index.c \
-			free_and_exit.c \
+SRCS		=	main.c \
+				parse_file.c \
+				print_result.c \
+				solve.c \
+				get_index.c \
+				free_and_exit.c \
 
-SRCSFD		=	srcs
-OBJSFD		=	objs
-INCLFD		=	includes libft/includes
 
-LIBFT		=	libft/libft.a
-LIBFTLIB	=	-Llibft -lft
+LIBFT		=	ft_atoi.c \
+				ft_error_exit.c \
+				ft_lstaddend.c \
+				ft_lstdel.c \
+				ft_lstdelcontent.c \
+				ft_lstnew.c \
+				ft_memalloc.c \
+				ft_memcpy.c \
+				ft_putchar.c \
+				ft_putendl.c \
+				ft_putnbr.c \
+				ft_putstr.c \
+				ft_strcmp.c \
+				ft_strdup.c \
+				ft_strequ.c \
+				ft_strlen.c \
+				ft_strlst_toarr.c \
+				ft_strsplit.c \
+				ft_strsplit_free.c \
+				get_next_line.c \
 
-SRCS		=	$(addprefix $(SRCSFD)/, $(SRCSFL))
-OBJS		=	$(addprefix $(OBJSFD)/, $(SRCSFL:.c=.o))
+OBJS		=	$(addprefix objs/,$(SRCS:.c=.o))
+OBJS		+=	$(addprefix objs/,$(LIBFT:.c=.o))
+
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS)
 	@echo "Objects created."
-	@$(CC) $(CFLAGS) $(addprefix -I ,$(INCLFD)) $(OBJS) $(LIBFTLIB) -o $@
+	@$(CC) $(CFLAGS) $(addprefix -I ,$(INCLFD)) $(OBJS) -o $@
 	@echo "Program created."
 
-$(OBJSFD):
+objs:
 	@mkdir $@
 
-$(LIBFT): $(LIBFTFD)
-	@make -C libft re
+objs/%.o: libft/%.c | objs
+	@$(CC) $(CFLAGS) -I includes -c $< -o $@
 
-$(OBJSFD)/%.o: $(SRCSFD)/%.c | $(OBJSFD)
-	@$(CC) $(CFLAGS) $(addprefix -I ,$(INCLFD)) -c $< -o $@
+objs/%.o: srcs/%.c | objs
+	@$(CC) $(CFLAGS) -I includes -c $< -o $@
 
 clean:
 	@$(RM) $(RMFLAGS) $(OBJS)
 	@echo "Objects deleted"
-	@$(RM) $(RMFLAGS) $(OBJSFD)
-	@make -C libft clean
+	@$(RM) $(RMFLAGS) objs
 
 fclean: clean
 	@$(RM) $(RMFLAGS) $(NAME)
 	@echo "Program deleted."
-	@make -C libft fclean
 
 re: fclean all

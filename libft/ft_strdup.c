@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 15:11:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:19:04 by sasha            ###   ########.fr       */
+/*   Created: 2016/09/22 13:21:43 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/09/19 13:35:03 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-int		main(void)
+char	*ft_strdup(const char *s)
 {
-	t_map	*map;
+	int		i;
+	char	*copy;
 
-	map = parse_file();
-	if (solve(map))
-		print_result(map);
-	else
-		ft_error_exit("ERROR\n");
-	free_and_exit(map, SUCCESS);
+	if (!s)
+		return (NULL);
+	copy = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (copy == NULL)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		copy[i] = s[i];
+		i++;
+	}
+	copy[i] = '\0';
+	return (copy);
 }

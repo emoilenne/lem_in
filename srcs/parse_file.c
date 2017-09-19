@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:02 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/05/29 19:28:24 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/09/19 13:26:10 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ static t_map	*init_map(void)
 	map->start = -1;
 	map->end = -1;
 	map->rooms_count = -1;
-	map->rooms_list = NULL;
-	map->rooms = NULL;
-	map->links = NULL;
-	map->path = NULL;
+	map->rooms_list = 0;
+	map->rooms = 0;
+	map->links = 0;
+	map->path = 0;
 	map->path_length = -1;
-	map->input = NULL;
+	map->input = 0;
 	return (map);
 }
 

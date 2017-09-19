@@ -6,7 +6,7 @@
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 15:15:23 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/05/29 19:06:41 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/09/19 13:38:02 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool		not_visited(int *path, int length, int room)
 	return (true);
 }
 
-static bool		_solve(t_map *map, int *path, int length, int current_room)
+static bool		solve_rec(t_map *map, int *path, int length, int current_room)
 {
 	bool	found_path;
 	bool	solved;
@@ -52,7 +52,7 @@ static bool		_solve(t_map *map, int *path, int length, int current_room)
 			not_visited(path, length, next_room))
 		{
 			path[length] = next_room;
-			found_path = _solve(map, path, length + 1, next_room);
+			found_path = solve_rec(map, path, length + 1, next_room);
 			solved = found_path || solved;
 		}
 		next_room++;
@@ -70,7 +70,7 @@ bool			solve(t_map *map)
 	path = (int*)malloc(sizeof(int) * (map->rooms_count - 1));
 	map->path = (int*)malloc(sizeof(int) * (map->rooms_count - 1));
 	map->path_length = 0;
-	solved = _solve(map, path, 0, map->start);
+	solved = solve_rec(map, path, 0, map->start);
 	free(path);
 	return (solved);
 }

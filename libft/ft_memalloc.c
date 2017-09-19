@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 15:11:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:19:04 by sasha            ###   ########.fr       */
+/*   Created: 2016/09/25 12:03:06 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/09/19 13:34:39 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-int		main(void)
+void	*ft_memalloc(size_t size)
 {
-	t_map	*map;
+	void			*fresh;
+	unsigned char	*cb;
 
-	map = parse_file();
-	if (solve(map))
-		print_result(map);
-	else
-		ft_error_exit("ERROR\n");
-	free_and_exit(map, SUCCESS);
+	fresh = malloc(size);
+	if (fresh == NULL)
+		return (NULL);
+	cb = (unsigned char *)fresh;
+	while (size-- > 0)
+		*(cb + size) = (unsigned char)0;
+	return (fresh);
 }

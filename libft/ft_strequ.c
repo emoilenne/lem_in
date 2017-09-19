@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 15:11:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:19:04 by sasha            ###   ########.fr       */
+/*   Created: 2016/09/25 21:53:17 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/09/19 13:35:05 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-int		main(void)
+int		ft_strequ(char const *s1, char const *s2)
 {
-	t_map	*map;
-
-	map = parse_file();
-	if (solve(map))
-		print_result(map);
-	else
-		ft_error_exit("ERROR\n");
-	free_and_exit(map, SUCCESS);
+	if (!s1 || !s2)
+		return (0);
+	return (ft_strcmp(s1, s2) == 0) ? (1) : (0);
 }

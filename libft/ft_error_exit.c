@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_error_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 15:11:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:19:04 by sasha            ###   ########.fr       */
+/*   Created: 2017/02/03 15:11:15 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/09/19 13:34:19 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-int		main(void)
+void	ft_error_exit(char const *error)
 {
-	t_map	*map;
-
-	map = parse_file();
-	if (solve(map))
-		print_result(map);
+	if (!error)
+		write(STDERR_FILENO, "Error\n", 6);
 	else
-		ft_error_exit("ERROR\n");
-	free_and_exit(map, SUCCESS);
+		write(STDERR_FILENO, error, ft_strlen(error));
+	exit(1);
 }

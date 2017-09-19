@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <ofedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 15:11:29 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/09/19 13:19:04 by sasha            ###   ########.fr       */
+/*   Created: 2016/09/21 12:53:06 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/09/19 13:34:41 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-int		main(void)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	t_map	*map;
+	unsigned char		*cdst;
+	const unsigned char	*csrc;
 
-	map = parse_file();
-	if (solve(map))
-		print_result(map);
-	else
-		ft_error_exit("ERROR\n");
-	free_and_exit(map, SUCCESS);
+	cdst = (unsigned char *)dst;
+	csrc = (const unsigned char *)src;
+	while (n > 0)
+	{
+		n--;
+		cdst[n] = csrc[n];
+	}
+	return (dst);
 }
